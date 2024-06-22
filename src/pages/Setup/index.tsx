@@ -1,4 +1,5 @@
 import {
+  FormInstance,
   PageContainer,
   ProForm,
   ProFormGroup,
@@ -8,11 +9,12 @@ import {
   ProFormText,
   ProTableProps,
 } from '@ant-design/pro-components';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { request, useRequest } from '@@/plugin-request';
 import { useParams } from '@@/exports';
 import { InputTypes } from '@/services/ant-design-pro/api';
 import { Button, message } from 'antd';
+import classNames from 'classnames';
 
 export default () => {
   const routeParams: ProTableProps<any, any> = useParams();
@@ -24,33 +26,33 @@ export default () => {
 
   const [current, setCurrent] = useState<number>(0);
   const resource = resources ? resources[current] : undefined;
+  const formRef = useRef<FormInstance>();
+  const change = (index: number) => {
+    setCurrent(index);
+    formRef?.current?.setFieldsValue(resources ? resources[index] : {});
+  };
 
   return (
     <PageContainer loading={resourceLoading} title="初始化后台">
       {resources && resource && (
         <div>
           <div className="flex justify-center items-end gap-3 w-full">
-            {current > 0 && (
-              <div className="text-center text-gray-600">
-                <div className="text-xl font-bold">{resources[current - 1].headerTitle}</div>
-                <div className="text-xs">上一个</div>
+            {resources?.map((item: any, index: number) => (
+              <div
+                className={classNames('text-center', {
+                  'font-bold text-black text-2xl': current === index,
+                  'text-gray-800 cursor-pointer': current !== index,
+                })}
+                key={index}
+                onClick={() => change(index)}
+              >
+                <div className="">{item.headerTitle}</div>
               </div>
-            )}
-
-            <div className="text-center font-bold">
-              <div className="text-2xl font-bold">{resource.headerTitle}</div>
-              <div>当前</div>
-            </div>
-
-            {current < resources.length - 1 && (
-              <div className="text-center text-gray-600">
-                <div className="text-xl font-bold">{resources[current + 1].headerTitle}</div>
-                <div className="text-xs">下一个</div>
-              </div>
-            )}
+            ))}
           </div>
 
           <ProForm
+            formRef={formRef}
             className="w-full mt-5"
             name={resource?.headerTitle}
             initialValues={resource}
@@ -96,15 +98,21 @@ export default () => {
                 <ProFormSwitch name="copyable" label="可复制" />
                 <ProFormSwitch name="search" label="可搜索" initialValue={true} />
                 <ProFormSwitch name="hideInTable" label="在列表隐藏" />
+                <ProFormList name="valueEnum" label="枚举">
+                  <ProFormGroup>
+                    <ProFormText name="value" label="枚举值" rules={[{ required: true }]} />
+                    <ProFormText name="label" label="显示名" rules={[{ required: true }]} />
+                  </ProFormGroup>
+                </ProFormList>
               </ProFormGroup>
             </ProFormList>
           </ProForm>
 
           <div className="mt-5">
             <Button.Group>
-              {current > 0 && <Button onClick={() => setCurrent(current - 1)}>上一个</Button>}
+              {current > 0 && <Button onClick={() => change(current - 1)}>上一个</Button>}
               {current < resources.length - 1 && (
-                <Button type="primary" onClick={() => setCurrent(current + 1)}>
+                <Button type="primary" onClick={() => change(current + 1)}>
                   下一个
                 </Button>
               )}
