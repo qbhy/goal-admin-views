@@ -52,6 +52,14 @@ export default [
     component: './TableList',
   },
   {
+    path: '/resource/:name/list',
+    component: './Resource/List',
+  },
+  {
+    path: '/setup',
+    component: './Setup',
+  },
+  {
     path: '/',
     redirect: '/welcome',
   },
