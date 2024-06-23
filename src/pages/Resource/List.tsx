@@ -24,9 +24,20 @@ export default () => {
       <ProTable
         actionRef={tableRef}
         {...meta}
+        onFilter={true}
         request={(params, sort, filter) => {
+          console.log('request', { params, sort, filter });
+          const { current, pageSize, ...p } = params;
+          const d: Record<string, any> = {};
+          // eslint-disable-next-line guard-for-in
+          for (const pKey in p) {
+            if (p[pKey] !== '') {
+              // d[pKey] = {condition: 'like', value: p[pKey]};
+              d[pKey] = p[pKey];
+            }
+          }
           return request(`/api/admin/resource/${routeParams['name']}/list`, {
-            params: { ...params, sort, filter },
+            params: { current, pageSize, sort, filter: { ...filter, ...d } },
           });
         }}
       />

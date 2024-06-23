@@ -2,6 +2,7 @@ import {
   FormInstance,
   PageContainer,
   ProForm,
+  ProFormDigit,
   ProFormGroup,
   ProFormList,
   ProFormSelect,
@@ -108,11 +109,17 @@ export default () => {
                   initialValue="text"
                   options={InputTypes}
                 />
+                <ProFormSwitch name="sorter" label="可排序" />
                 <ProFormText name="tooltip" label="工具提示" />
                 <ProFormSwitch name="copyable" label="可复制" />
                 <ProFormSwitch name="search" label="可搜索" initialValue={true} />
                 <ProFormSwitch name="hideInTable" label="在列表隐藏" />
-                <ProFormText name="render" label="渲染函数" />
+                <ProFormDigit
+                  name="order"
+                  label="查询表单中的排序"
+                  tooltip="查询表单中的权重，权重大排序靠前"
+                />
+                <ProFormSelect name="render" label="渲染函数" options={[]} />
                 <ProFormList name="valueEnum" label="枚举">
                   <ProFormGroup>
                     <ProFormText name="value" label="枚举值" rules={[{ required: true }]} />
