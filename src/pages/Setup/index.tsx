@@ -18,9 +18,11 @@ import classNames from 'classnames';
 
 export default () => {
   const routeParams: ProTableProps<any, any> = useParams();
-  const { data: resources, loading: resourceLoading } = useRequest(() =>
-    request<{ data: any[] }>(`/api/admin/resource/list`),
-  );
+  const {
+    data: resources,
+    loading: resourceLoading,
+    refresh,
+  } = useRequest(() => request<{ data: any[] }>(`/api/admin/resource/list`));
 
   useEffect(() => {}, [routeParams]);
 
@@ -31,6 +33,8 @@ export default () => {
     setCurrent(index);
     formRef?.current?.setFieldsValue(resources ? resources[index] : {});
   };
+
+  console.log('resource', resource);
 
   return (
     <PageContainer loading={resourceLoading} title="初始化后台">
@@ -57,10 +61,20 @@ export default () => {
             name={resource?.headerTitle}
             initialValues={resource}
             onFinish={(values) => {
-              message.success('下一个');
-              console.log(values);
+              request(`/api/admin/resource/${resource.name}/save`, {
+                method: 'POST',
+                data: values,
+              }).then(() => {
+                message.success('更新成功').then(() => {
+                  if (current < resources.length - 1) {
+                    change(current + 1);
+                  }
+                });
+                refresh();
+              });
             }}
           >
+            <ProFormText name="name" label="表名" hidden />
             <ProFormText name="headerTitle" label="标题" />
             <ProFormText name="subTitle" label="子标题" />
             <ProFormSelect
@@ -98,6 +112,7 @@ export default () => {
                 <ProFormSwitch name="copyable" label="可复制" />
                 <ProFormSwitch name="search" label="可搜索" initialValue={true} />
                 <ProFormSwitch name="hideInTable" label="在列表隐藏" />
+                <ProFormText name="render" label="渲染函数" />
                 <ProFormList name="valueEnum" label="枚举">
                   <ProFormGroup>
                     <ProFormText name="value" label="枚举值" rules={[{ required: true }]} />

@@ -54,13 +54,19 @@ export async function currentUser(options?: { [key: string]: any }) {
   });
 }
 
-/** 获取当前的用户 GET /api/currentUser */
 export async function getMenuList(options?: { [key: string]: any }) {
   return request<{
     data: MenuDataItem[];
   }>('/api/admin/menu/list', {
     method: 'GET',
     ...(options || {}),
+  }).then((res) => res.data);
+}
+
+export async function saveMenuList(menus: MenuDataItem[]) {
+  return request('/api/admin/menu/list', {
+    method: 'POST',
+    data: menus,
   }).then((res) => res.data);
 }
 
