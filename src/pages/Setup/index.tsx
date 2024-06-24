@@ -2,6 +2,7 @@ import {
   FormInstance,
   PageContainer,
   ProForm,
+  ProFormDependency,
   ProFormDigit,
   ProFormGroup,
   ProFormList,
@@ -110,15 +111,29 @@ export default () => {
                   options={InputTypes}
                 />
                 <ProFormSwitch name="sorter" label="可排序" />
-                <ProFormText name="tooltip" label="工具提示" />
+                <ProFormText
+                  name="tooltip"
+                  label="工具提示"
+                  tooltip="类似这样的字段上方的提示信息"
+                />
                 <ProFormSwitch name="copyable" label="可复制" />
                 <ProFormSwitch name="search" label="可搜索" initialValue={true} />
+
+                <ProFormDependency name={['search']}>
+                  {({ search }) => {
+                    return (
+                      search && (
+                        <ProFormDigit
+                          name="order"
+                          label="查询表单中的排序"
+                          placeholder="查询表单中的权重，权重大排序靠前"
+                        />
+                      )
+                    );
+                  }}
+                </ProFormDependency>
+
                 <ProFormSwitch name="hideInTable" label="在列表隐藏" />
-                <ProFormDigit
-                  name="order"
-                  label="查询表单中的排序"
-                  tooltip="查询表单中的权重，权重大排序靠前"
-                />
                 <ProFormSelect name="render" label="渲染函数" options={[]} />
                 <ProFormList name="valueEnum" label="枚举">
                   <ProFormGroup>

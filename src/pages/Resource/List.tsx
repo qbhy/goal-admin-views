@@ -24,9 +24,8 @@ export default () => {
       <ProTable
         actionRef={tableRef}
         {...meta}
-        onFilter={true}
+        search={{}}
         request={(params, sort, filter) => {
-          console.log('request', { params, sort, filter });
           const { current, pageSize, ...p } = params;
           const d: Record<string, any> = {};
           // eslint-disable-next-line guard-for-in
