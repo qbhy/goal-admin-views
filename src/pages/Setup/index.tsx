@@ -1,5 +1,6 @@
 import {
   FormInstance,
+  FormListActionType,
   PageContainer,
   ProForm,
   ProFormDependency,
@@ -31,12 +32,11 @@ export default () => {
   const [current, setCurrent] = useState<number>(0);
   const resource = resources ? resources[current] : undefined;
   const formRef = useRef<FormInstance>();
+  const formListRef = useRef<FormListActionType>();
   const change = (index: number) => {
     setCurrent(index);
     formRef?.current?.setFieldsValue(resources ? resources[index] : {});
   };
-
-  console.log('resource', resource);
 
   return (
     <PageContainer loading={resourceLoading} title="初始化后台">
@@ -100,7 +100,13 @@ export default () => {
               ]}
             />
 
-            <ProFormList name="columns" required label="字段描述">
+            <ProFormList
+              name="columns"
+              required
+              label="字段描述"
+              actionRef={formListRef}
+              rowProps={{}}
+            >
               <ProFormGroup>
                 <ProFormText name="dataIndex" label="字段" disabled />
                 <ProFormText name="title" label="显示名" rules={[{ required: true }]} />
@@ -141,6 +147,41 @@ export default () => {
                     <ProFormText name="label" label="显示名" rules={[{ required: true }]} />
                   </ProFormGroup>
                 </ProFormList>
+
+                <ProFormDependency name={['*']}>
+                  {(args, args2) => {
+                    console.log('args', args, args2);
+                    return (
+                      args && (
+                        <Button.Group>
+                          {args.columns.length > 1 && (
+                            <Button
+                              onClick={() =>
+                                formListRef?.current?.move(
+                                  args.columns.length - 1,
+                                  args.columns.length - 2,
+                                )
+                              }
+                            >
+                              上移
+                            </Button>
+                          )}
+
+                          <Button
+                            onClick={() =>
+                              formListRef?.current?.move(
+                                args.columns.length - 1,
+                                args.columns.length,
+                              )
+                            }
+                          >
+                            下移
+                          </Button>
+                        </Button.Group>
+                      )
+                    );
+                  }}
+                </ProFormDependency>
               </ProFormGroup>
             </ProFormList>
           </ProForm>
