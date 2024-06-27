@@ -1,6 +1,6 @@
 Language : [🇺🇸](./README.md) | [🇨🇳](./README.zh-CN.md) | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | 🇯🇵 | [🇫🇷](./README.fr-FR.md) | [🇵🇹](./README.pt-BR.md) | [🇸🇦](./README.ar-DZ.md)
 
-<h1 align="center">Ant Design Pro</h1>
+<h1 align="center">Goal Admin</h1>
 
 <div align="center">
 
@@ -21,7 +21,7 @@ Language : [🇺🇸](./README.md) | [🇨🇳](./README.zh-CN.md) | [🇷🇺](
 
 ## 2.0 がリリースされました 🎉🎉🎉
 
-[Announcing Ant Design Pro 2.0.0](https://medium.com/ant-design/beautiful-and-powerful-ant-design-pro-2-0-release-51358da5af95)
+[Announcing Goal Admin 2.0.0](https://medium.com/ant-design/beautiful-and-powerful-ant-design-pro-2-0-release-51358da5af95)
 
 ## 翻訳の募集 :loudspeaker:
 
@@ -29,7 +29,7 @@ Language : [🇺🇸](./README.md) | [🇨🇳](./README.zh-CN.md) | [🇷🇺](
 
 ## 特徴
 
-- :gem: **きちんとしたデザイン**: [Ant Design specification](http://ant.design/) に従ってくださ い。
+- :gem: **きちんとしたデザイン**: [Goal Admin specification](http://ant.design/) に従ってくださ い。
 - :triangular_ruler: **共通のテンプレート**: 業務システム用のテンプレート
 - :rocket: **現状のアート開発**: `React/umi/dva/antd` の最新開発スタック
 - :iphone: **レスポンシブ**: さまざまな画面サイズ用の設計
@@ -108,7 +108,7 @@ $ npm start         # http://localhost:8000 を開く
 
 どんな種類の貢献でも大歓迎です。あなたがこのプロジェクトに貢献できる方法のいくつかの例はここにあります。：
 
-- 毎日の仕事に Ant Design Pro を使用すること。
+- 毎日の仕事に Goal Admin を使用すること。
 - 報告すること。 [issues](http://github.com/ant-design/ant-design-pro/issues) にバグ報告や質問をしてください。
 - 更新すること。 改善を、[pull requests](http://github.com/ant-design/ant-design-pro/pulls) で送ってください。
 

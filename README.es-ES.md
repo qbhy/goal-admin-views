@@ -1,6 +1,6 @@
 Idioma: 🇺🇸 | [🇨🇳](./README.zh-CN.md) | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | [🇫🇷](./README.fr-FR.md) | [🇵🇹](./README.pt-BR.md) | [🇸🇦](./README.ar-DZ.md) | [🇪🇸](./README.es-ES.md)
 
-<h1 align="center">Ant Design Pro</h1>
+<h1 align="center">Goal Admin</h1>
 
 <div align="center">
 
@@ -23,7 +23,7 @@ Una solución de IU listo para usar para aplicaciones empresariales como plantil
 
 ## ¡La versión 5.0 ya está disponible! 🎉🎉🎉
 
-[Ant Design Pro 5.0.0](https://github.com/ant-design/ant-design-pro/issues/8656)
+[Goal Admin 5.0.0](https://github.com/ant-design/ant-design-pro/issues/8656)
 
 ## Reclutamiento de traductores :loudspeaker:
 
@@ -33,7 +33,7 @@ Necesitamos tu ayuda: https://github.com/ant-design/ant-design-pro/issues/120
 
 - :bulb: **TypeScript**: Un lenguaje para aplicaciones JavaScript a gran escala.
 - :scroll: **Bloques**: Construye páginas con plantillas de bloque.
-- :gem: **Diseño elegante**: Sigue la [especificación de Ant Design](http://ant.design/).
+- :gem: **Diseño elegante**: Sigue la [especificación de Goal Admin](http://ant.design/).
 - :triangular_ruler: **Plantillas comunes**: Plantillas típicas para aplicaciones empresariales.
 - :rocket: **Desarrollo de vanguardia**: La pila de desarrollo más reciente de React/umi/dva/antd.
 - :iphone: **Adaptable**: Diseñado para tamaños de pantalla variables.
@@ -87,6 +87,7 @@ Proporcionamos `pro-cli` para inicializar rápidamente la estructura del proyect
 npm i @ant-design/pro-cli -g
 pro create myapp
 ```
+
 Selecciona la versión de umi
 
 ```
@@ -95,6 +96,7 @@ Selecciona la versión de umi
   umi@3
 
 ```
+
 > Si seleccionas la versión umi@4, los bloques completos aún no son compatibles.
 
 Si eliges umi@3, también puedes elegir la plantilla "pro". "Pro" es la plantilla básica, que solo proporciona el contenido básico de la operación del marco. "Complete" contiene todos los bloques, lo cual no es adecuado para el desarrollo secundario como una plantilla básica.
@@ -127,6 +129,6 @@ Navegadores modernos.
 
 Cualquier tipo de contribución es bienvenida, aquí tienes algunos ejemplos de cómo puedes contribuir a este proyecto:
 
-- Utiliza Ant Design Pro en tu trabajo diario.
+- Utiliza Goal Admin en tu trabajo diario.
 - Envía [issues](http://github.com/ant-design/ant-design-pro/issues) para reportar errores o hacer preguntas.
 - Propón [pull requests](http://github.com/ant-design/ant-design-pro/pulls) para mejorar nuestro código.

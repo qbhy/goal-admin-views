@@ -1,6 +1,6 @@
 Language : [🇺🇸](./README.md) | [🇨🇳](./README.zh-CN.md) | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | [🇫🇷](./README.fr-FR.md) | [🇵🇹](./README.pt-BR.md) | 🇸🇦 |
 
-<h1 align="center">Ant Design Pro</h1>
+<h1 align="center">Goal Admin</h1>
 <div dir="rtl">
 
 <div align="center">
@@ -24,7 +24,7 @@ Language : [🇺🇸](./README.md) | [🇨🇳](./README.zh-CN.md) | [🇷🇺](
 
 ## 4.0 صدر الآن! 🎉🎉🎉
 
-[الإعلان عن Ant Design Pro 4.0.0](https://medium.com/ant-design/ant-design-pro-v4-is-here-6f23098ae9d9)
+[الإعلان عن Goal Admin 4.0.0](https://medium.com/ant-design/ant-design-pro-v4-is-here-6f23098ae9d9)
 
 ## توظيف الترجمة :loudspeaker:
 
@@ -121,7 +121,7 @@ $ npm start         # visit http://localhost:8000
 
 نرحب بأي نوع من المساهمات ، وإليك بعض الأمثلة عن كيفية المساهمة في هذا المشروع:
 
-- استخدم Ant Design Pro في عملك اليومي.
+- استخدم Goal Admin في عملك اليومي.
 - إرسال [القضايا](http://github.com/ant-design/ant-design-pro/issues) للإبلاغ عن مشكل أو لطرح أسئلة
 - اقترح [طلبات السحب](http://github.com/ant-design/ant-design-pro/pulls) لتحسين الكود الخاص بنا.
 

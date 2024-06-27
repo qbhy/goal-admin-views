@@ -1,6 +1,6 @@
 Language : [🇺🇸](./README.md) | [🇨🇳](./README.zh-CN.md) | [🇷🇺](./README.ru-RU.md) | [🇹🇷](./README.tr-TR.md) | [🇯🇵](./README.ja-JP.md) | 🇫🇷 | [🇵🇹](./README.pt-BR.md) | [🇸🇦](./README.ar-DZ.md)
 
-<h1 align="center">Ant Design Pro</h1>
+<h1 align="center">Goal Admin</h1>
 
 <div align="center">
 
@@ -21,7 +21,7 @@ Une solution UI prête à l'emploi pour des applications d'entreprise en tant qu
 
 ## 2.0 Sorti maintenant! 🎉🎉🎉
 
-[Annoncement de Ant Design Pro 2.0.0](https://medium.com/ant-design/beautiful-and-powerful-ant-design-pro-2-0-release-51358da5af95)
+[Annoncement de Goal Admin 2.0.0](https://medium.com/ant-design/beautiful-and-powerful-ant-design-pro-2-0-release-51358da5af95)
 
 ## Recrutement pour la traduction :loudspeaker:
 
@@ -29,7 +29,7 @@ Nous avons besoin de votre aide: https://github.com/ant-design/ant-design-pro/is
 
 ## Fonctionnalités
 
-- :gem: **Design soigné**: Suit [la spécification Ant Design](http://ant.design/)
+- :gem: **Design soigné**: Suit [la spécification Goal Admin](http://ant.design/)
 - :triangular_ruler: **Modèles communs**: Modèles typiques d'application d'entreprise
 - :rocket: **Développement dernier cri**: Infrastructure de développement de React/umi/dva/antd la plus récente
 - :iphone: **Design adapté**: Conçu pour des tailles d'écran variables
@@ -108,6 +108,6 @@ Navigateurs modernes.
 
 Toute forme de contribution est la bienvenue, voici quelques exemples de façons dont vous pouvez contribuer à ce projet:
 
-- Utiliser Ant Design Pro dans votre travail quotidien.
+- Utiliser Goal Admin dans votre travail quotidien.
 - Soumettre des [issues](http://github.com/ant-design/ant-design-pro/issues) pour reporter les bugs ou poser des questions.
 - Proposer des [pull requests](http://github.com/ant-design/ant-design-pro/pulls) pour améliorer notre code.

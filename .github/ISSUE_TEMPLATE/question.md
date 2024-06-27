@@ -1,6 +1,6 @@
 ---
 name: '疑问或需要帮助 | Questions or need help ❓'
-about: 对 Ant Design Pro 使用的疑问或需要帮助
+about: 对 Goal Admin 使用的疑问或需要帮助
 title: '🧐[问题 | question]'
 labels: '🧐 question'
 assignees: ''
