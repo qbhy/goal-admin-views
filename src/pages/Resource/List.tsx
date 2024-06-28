@@ -4,13 +4,15 @@ import { request, useRequest } from '@@/plugin-request';
 import { useParams } from '@@/exports';
 import { Button, Dropdown, Modal } from 'antd';
 import ResourceEditor, { GoalProColumn, ResourceEditorAction } from '@/components/ResourceEditor';
+import { InputTypes } from '@/components/ColumnTypes/ColumnType';
 
-type ResourceMeta = ProTableProps<any, any> & {
+type ResourceMeta = {
   actions: string[];
   headerTitle?: string;
   subTitle?: string;
   columns?: GoalProColumn[];
-} & Record<string, any>;
+} & ProTableProps<any, any> &
+  Record<string, any>;
 
 export default () => {
   const routeParams = useParams();
@@ -35,6 +37,14 @@ export default () => {
   const columns = meta?.columns
     ?.filter((item) => !item.hideInTable)
     .map((item) => {
+      const type = InputTypes.find((type) => item.valueType === type.value);
+      if (type?.displayRender) {
+        item.render = (text, data, index) => {
+          return type?.displayRender
+            ? type.displayRender(text, data, index, item.valueTypeParams || {})
+            : text;
+        };
+      }
       return item;
     });
   const actionsEditorText = { edit: '编辑', delete: '删除' };

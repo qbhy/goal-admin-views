@@ -6,6 +6,7 @@ import {
   ProFormDependency,
   ProFormDigit,
   ProFormGroup,
+  ProFormItem,
   ProFormList,
   ProFormSelect,
   ProFormSwitch,
@@ -15,9 +16,9 @@ import {
 import React, { useEffect, useRef, useState } from 'react';
 import { request, useRequest } from '@@/plugin-request';
 import { useParams } from '@@/exports';
-import { InputTypes } from '@/services/ant-design-pro/api';
 import { Button, message } from 'antd';
 import classNames from 'classnames';
+import { InputTypes } from '@/components/ColumnTypes/ColumnType';
 
 export default () => {
   const routeParams: ProTableProps<any, any> = useParams();
@@ -123,7 +124,7 @@ export default () => {
                   tooltip="类似这样的字段上方的提示信息"
                 />
                 <ProFormSwitch name="copyable" label="可复制" />
-                <ProFormSwitch name="search" label="可搜索" initialValue={true} />
+                <ProFormSwitch name="search" label="可搜索" />
 
                 <ProFormDependency name={['search']}>
                   {({ search }) => {
@@ -148,40 +149,42 @@ export default () => {
                   </ProFormGroup>
                 </ProFormList>
 
-                <ProFormDependency name={['*']}>
-                  {(args, args2) => {
-                    console.log('args', args, args2);
-                    return (
-                      args && (
-                        <Button.Group>
-                          {args.columns.length > 1 && (
+                <ProFormItem label="排序">
+                  <ProFormDependency name={['*']}>
+                    {(args, args2) => {
+                      console.log('args', args, args2);
+                      return (
+                        args && (
+                          <Button.Group>
+                            {args.columns.length > 1 && (
+                              <Button
+                                onClick={() =>
+                                  formListRef?.current?.move(
+                                    args.columns.length - 1,
+                                    args.columns.length - 2,
+                                  )
+                                }
+                              >
+                                上移
+                              </Button>
+                            )}
+
                             <Button
                               onClick={() =>
                                 formListRef?.current?.move(
                                   args.columns.length - 1,
-                                  args.columns.length - 2,
+                                  args.columns.length,
                                 )
                               }
                             >
-                              上移
+                              下移
                             </Button>
-                          )}
-
-                          <Button
-                            onClick={() =>
-                              formListRef?.current?.move(
-                                args.columns.length - 1,
-                                args.columns.length,
-                              )
-                            }
-                          >
-                            下移
-                          </Button>
-                        </Button.Group>
-                      )
-                    );
-                  }}
-                </ProFormDependency>
+                          </Button.Group>
+                        )
+                      );
+                    }}
+                  </ProFormDependency>
+                </ProFormItem>
               </ProFormGroup>
             </ProFormList>
           </ProForm>
