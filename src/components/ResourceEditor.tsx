@@ -16,6 +16,7 @@ export type GoalProColumn = ProColumns & {
 };
 
 export type ResourceEditorProps = {
+  rowKey?: any;
   visible?: boolean;
   title?: string;
   onCancel?: () => void;
@@ -28,7 +29,7 @@ export type ResourceEditorAction = {
 };
 
 const ResourceEditor = forwardRef<ResourceEditorAction | undefined, ResourceEditorProps>(
-  ({ visible = false, onCancel, title, columns = [] }, ref) => {
+  ({ visible = false, onCancel, title, columns = [], rowKey }, ref) => {
     const form = useRef<ProFormInstance>();
     const [editType, setEditType] = React.useState<'edit' | 'create'>('create');
 
@@ -40,6 +41,7 @@ const ResourceEditor = forwardRef<ResourceEditorAction | undefined, ResourceEdit
           form.current?.setFieldsValue(values);
         },
         setEditForm(values: Record<string, any>) {
+          console.log('setEditForm', values);
           setEditType('edit');
           form.current?.setFieldsValue(values);
         },
@@ -48,7 +50,7 @@ const ResourceEditor = forwardRef<ResourceEditorAction | undefined, ResourceEdit
     );
 
     return (
-      <Modal width="80%" maskClosable open={visible} title={title} onCancel={onCancel}>
+      <Modal width="80%" maskClosable open={visible} forceRender title={title} onCancel={onCancel}>
         <ProForm
           title={editType}
           formRef={form}
@@ -60,11 +62,22 @@ const ResourceEditor = forwardRef<ResourceEditorAction | undefined, ResourceEdit
             if (col.hideInForm || col.dataIndex.length === 0) return undefined;
             const type = InputTypes.find((type) => col.valueType === type.value);
             return type?.formRender ? (
-              <ProFormItem label={type.label} name={type.value} key={index}>
+              <ProFormItem
+                label={type.label}
+                name={type.value}
+                key={index}
+                hidden={col.dataIndex === rowKey}
+              >
                 {type?.formRender(col)}
               </ProFormItem>
             ) : (
-              <ProFormText key={index} label={col.title} rules={col.rules} name={col.dataIndex} />
+              <ProFormText
+                key={index}
+                label={col.title}
+                rules={col.rules}
+                name={col.dataIndex}
+                hidden={col.dataIndex === rowKey}
+              />
             );
           })}
         </ProForm>

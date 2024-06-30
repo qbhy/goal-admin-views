@@ -19,8 +19,8 @@ export const DatabaseType: ColumnType = {
         <div className="flex gap-2">
           {values.map((item, index) => (
             <Tooltip title={item} key={index}>
-              {/* @ts-ignore*/}
               <div className="px-2 py-1 rounded bg-gray-100 text-black">
+                {/* @ts-ignore*/}
                 {column.valueEnum[item] || item}
               </div>
             </Tooltip>

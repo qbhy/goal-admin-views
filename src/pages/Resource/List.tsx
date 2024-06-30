@@ -61,20 +61,14 @@ export default () => {
       meta?.actions?.forEach((item) => {
         switch (item) {
           case 'edit':
-            items.push({
-              key: item,
-              label: actionsEditorText[item],
-            });
+            items.push({ key: item, label: actionsEditorText[item] });
             handles[item] = () => {
               setShowEditor(true);
               editorRef.current?.setEditForm(data);
             };
             break;
           case 'delete':
-            items.push({
-              key: item,
-              label: actionsEditorText[item],
-            });
+            items.push({ key: item, label: actionsEditorText[item] });
             handles[item] = () =>
               Modal.confirm({
                 type: 'warn',
@@ -98,17 +92,18 @@ export default () => {
     },
   });
 
-  console.log('tableColumns', tableColumns);
-
   return (
     <PageContainer loading={loading} title={meta?.headerTitle} subTitle={meta?.subTitle}>
-      <ResourceEditor
-        ref={editorRef}
-        visible={showEditor}
-        columns={columns}
-        onCancel={() => setShowEditor(false)}
-        title={meta?.headerTitle}
-      />
+      {columns.length > 0 && (
+        <ResourceEditor
+          rowKey={meta?.rowKey}
+          ref={editorRef}
+          visible={showEditor}
+          columns={columns}
+          onCancel={() => setShowEditor(false)}
+          title={meta?.headerTitle}
+        />
+      )}
 
       <ProTable
         actionRef={tableRef}
