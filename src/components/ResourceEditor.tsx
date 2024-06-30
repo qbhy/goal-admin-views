@@ -1,6 +1,12 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { Modal } from 'antd';
-import { ProColumns, ProForm, ProFormInstance, ProFormText } from '@ant-design/pro-components';
+import {
+  ProColumns,
+  ProForm,
+  ProFormInstance,
+  ProFormItem,
+  ProFormText,
+} from '@ant-design/pro-components';
 import { InputTypes } from '@/components/ColumnTypes/ColumnType';
 
 export type GoalProColumn = ProColumns & {
@@ -54,7 +60,9 @@ const ResourceEditor = forwardRef<ResourceEditorAction | undefined, ResourceEdit
             if (col.hideInForm || col.dataIndex.length === 0) return undefined;
             const type = InputTypes.find((type) => col.valueType === type.value);
             return type?.formRender ? (
-              type?.formRender(col, col.valueTypeParams || {})
+              <ProFormItem label={type.label} name={type.value} key={index}>
+                {type?.formRender(col)}
+              </ProFormItem>
             ) : (
               <ProFormText key={index} label={col.title} rules={col.rules} name={col.dataIndex} />
             );

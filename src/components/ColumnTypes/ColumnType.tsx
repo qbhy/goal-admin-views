@@ -1,18 +1,19 @@
 import { ReactNode } from 'react';
 import { GoalProColumn } from '@/components/ResourceEditor';
 import { DatabaseType } from '@/components/ColumnTypes/database';
+import { ProColumns } from '@ant-design/pro-components';
 
 export interface ColumnType {
   value: string;
   label: string;
   displayRender?: (
-    dom: ReactNode,
+    text: ReactNode,
     item: any,
     index: number,
-    params: Record<string, any>,
-  ) => ReactNode;
-  formRender?: (col: GoalProColumn, params: Record<string, any>) => ReactNode;
-  params?: GoalProColumn[];
+    column: GoalProColumn,
+  ) => ReactNode | any;
+  formRender?: (col: GoalProColumn) => ReactNode;
+  params?: (resources: any[]) => ProColumns[];
 }
 
 export const InputTypes: ColumnType[] = [
@@ -56,7 +57,3 @@ export const InputTypes: ColumnType[] = [
   { value: 'divider', label: '分割线' },
   { value: 'dependency', label: '依赖项' },
 ];
-
-export const Types = {
-  database: {} as ColumnType,
-};

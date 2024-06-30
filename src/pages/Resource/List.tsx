@@ -16,12 +16,18 @@ type ResourceMeta = {
 
 export default () => {
   const routeParams = useParams();
+  const [columns, setColumns] = useState<GoalProColumn[]>([]);
   const resourceName = routeParams['name'];
   const {
     data: meta,
     loading,
     refresh,
-  } = useRequest(() => request<{ data: ResourceMeta }>(`/api/admin/resource/${resourceName}/meta`));
+  } = useRequest(() =>
+    request<{ data: ResourceMeta }>(`/api/admin/resource/${resourceName}/meta`).then((res) => {
+      setColumns(res.data.columns || []);
+      return res;
+    }),
+  );
   const tableRef = useRef<ActionType>(null);
 
   useEffect(() => {
@@ -29,27 +35,24 @@ export default () => {
     tableRef.current?.reload();
   }, [routeParams]);
 
-  console.log('meta', meta);
   const { actions } = meta || {};
   const [requestParams, setRequestParams] = useState<any>();
   const [showEditor, setShowEditor] = useState<boolean>(false);
   const editorRef = useRef<ResourceEditorAction>();
-  const columns = meta?.columns
+  const tableColumns = columns
     ?.filter((item) => !item.hideInTable)
     .map((item) => {
       const type = InputTypes.find((type) => item.valueType === type.value);
       if (type?.displayRender) {
         item.render = (text, data, index) => {
-          return type?.displayRender
-            ? type.displayRender(text, data, index, item.valueTypeParams || {})
-            : text;
+          return type?.displayRender ? type.displayRender(text, data, index, item) : text;
         };
       }
       return item;
     });
   const actionsEditorText = { edit: '编辑', delete: '删除' };
 
-  columns?.push({
+  tableColumns?.push({
     title: '操作',
     render: (text, data, i) => {
       const items: any = [];
@@ -95,12 +98,14 @@ export default () => {
     },
   });
 
+  console.log('tableColumns', tableColumns);
+
   return (
     <PageContainer loading={loading} title={meta?.headerTitle} subTitle={meta?.subTitle}>
       <ResourceEditor
         ref={editorRef}
         visible={showEditor}
-        columns={meta?.columns}
+        columns={columns}
         onCancel={() => setShowEditor(false)}
         title={meta?.headerTitle}
       />
@@ -108,13 +113,14 @@ export default () => {
       <ProTable
         actionRef={tableRef}
         {...meta}
-        columns={columns}
+        columns={tableColumns}
         toolbar={{
           actions: actions?.map((item) => {
             switch (item) {
               case 'create':
                 return (
                   <Button
+                    key={item}
                     onClick={() => {
                       const initialData: Record<string, any> = {};
                       meta?.columns?.forEach((col) => {
@@ -131,6 +137,7 @@ export default () => {
               case 'export':
                 return (
                   <Button
+                    key={item}
                     onClick={() =>
                       request(`/api/admin/resource/${resourceName}/export`, {
                         params: requestParams,
@@ -157,7 +164,23 @@ export default () => {
           }
           const tmpParams = { current, pageSize, sort, filter: { ...filter, ...d } };
           setRequestParams(tmpParams);
-          return request(`/api/admin/resource/${routeParams['name']}/list`, { params: tmpParams });
+          return request(`/api/admin/resource/${routeParams['name']}/list`, {
+            params: tmpParams,
+          }).then((res) => {
+            setColumns(
+              columns.map((column) => {
+                if (res.with[column.dataIndex]) {
+                  column.valueEnum = {};
+                  for (const item of res.with[column.dataIndex]) {
+                    column.valueEnum[item['value']] = item['label'];
+                  }
+                }
+                return column;
+              }),
+            );
+            console.log('request resources list', res);
+            return res;
+          });
         }}
       />
     </PageContainer>
