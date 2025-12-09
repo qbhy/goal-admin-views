@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App base styles */
+:root {
+  --radius: 12px;
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-card;
+}
+
+.btn-primary {
+  @apply bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-lg;
+}
+
+.ant-form-item-control-input {
+  min-width: 100px;
+}

@@ -1,5 +1,6 @@
-﻿import type { RequestOptions } from '@@/plugin-request/request';
+import type { RequestOptions } from '@@/plugin-request/request';
 import type { RequestConfig } from '@umijs/max';
+import { history } from '@umijs/max';
 import { message, notification } from 'antd';
 
 // 错误处理方案： 错误类型
@@ -10,7 +11,6 @@ enum ErrorShowType {
   NOTIFICATION = 3,
   REDIRECT = 9,
 }
-
 // 与后端约定的响应数据格式
 interface ResponseStructure {
   success: boolean;
@@ -90,8 +90,8 @@ export const errorConfig: RequestConfig = {
   requestInterceptors: [
     (config: RequestOptions) => {
       // 拦截请求配置，进行个性化处理。
-      // const url = config?.url?.concat('?token = 123');
-      return { ...config };
+      const url = config?.url?.concat('?token=123');
+      return { ...config, url };
     },
   ],
 
@@ -99,8 +99,29 @@ export const errorConfig: RequestConfig = {
   responseInterceptors: [
     (response) => {
       // 拦截响应数据，进行个性化处理
-      const { data } = response as unknown as ResponseStructure;
+      const axiosResp: any = response;
+      const data = axiosResp?.data as any;
+      const url: string | undefined = axiosResp?.config?.url;
 
+      // 兼容后端返回结构：当 current-user 返回 100403（鉴权失败）时跳转登录页
+      if (url && url.includes('/api/admin/current-user')) {
+        const code = data?.code ?? data?.errorCode;
+        if (code === 100403) {
+          // 清理本地 token，避免后续接口继续报错
+          try {
+            localStorage.removeItem('token');
+          } catch (e) {}
+          // 保留当前路径用于登录后回跳
+          const { location } = history;
+          const redirect = encodeURIComponent(
+            `${location.pathname}${location.search || ''}`,
+          );
+          history.push(`/admin/login?redirect=${redirect}`);
+          return response;
+        }
+      }
+
+      // 兼容后端 success=false 的错误提示
       if (data?.success === false) {
         message.error('请求失败！');
       }

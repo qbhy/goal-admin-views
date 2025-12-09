@@ -17,7 +17,8 @@ const Admin: React.FC = () => {
         <Alert
           message={intl.formatMessage({
             id: 'pages.welcome.alertMessage',
-            defaultMessage: 'Faster and stronger heavy-duty components have been released.',
+            defaultMessage:
+              'Faster and stronger heavy-duty components have been released.',
           })}
           type="success"
           showIcon
@@ -28,15 +29,12 @@ const Admin: React.FC = () => {
           }}
         />
         <Typography.Title level={2} style={{ textAlign: 'center' }}>
-          <SmileTwoTone /> Goal Admin <HeartTwoTone twoToneColor="#eb2f96" /> You
+          <SmileTwoTone /> Goal-Admin 后台管理系统{' '}
+          <HeartTwoTone twoToneColor="#eb2f96" /> 助力运营
         </Typography.Title>
       </Card>
       <p style={{ textAlign: 'center', marginTop: 24 }}>
-        Want to add more pages? Please refer to{' '}
-        <a href="https://pro.ant.design/docs/block-cn" target="_blank" rel="noopener noreferrer">
-          use block
-        </a>
-        。
+        如需添加更多页面或功能，请联系平台管理员或查看内部文档。
       </p>
     </PageContainer>
   );

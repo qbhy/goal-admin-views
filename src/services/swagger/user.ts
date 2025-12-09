@@ -82,7 +82,7 @@ export async function loginUser(
   params: API.loginUserParams,
   options?: { [key: string]: any },
 ) {
-  return request<string>('/user/login', {
+  return request<string>('/admin/login', {
     method: 'GET',
     params: {
       ...params,

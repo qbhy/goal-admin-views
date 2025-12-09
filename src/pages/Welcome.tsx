@@ -116,7 +116,7 @@ const Welcome: React.FC = () => {
               color: token.colorTextHeading,
             }}
           >
-            欢迎使用 Goal Admin
+            欢迎使用 Goal-Admin 后台管理系统
           </div>
           <p
             style={{
@@ -128,8 +128,7 @@ const Welcome: React.FC = () => {
               width: '65%',
             }}
           >
-            Goal Admin 是一个整合了 umi，Goal Admin 和 ProComponents
-            的脚手架方案。致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
+            Goal-Admin 后台管理系统用于管理平台的用户、管理员、资源与运营数据，提供统一的资源列表、审核流程、权限控制与数据导出能力，助力高效、安全地开展日常运营与风控工作。
           </p>
           <div
             style={{
@@ -140,21 +139,21 @@ const Welcome: React.FC = () => {
           >
             <InfoCard
               index={1}
-              href="https://umijs.org/docs/introduce/introduce"
-              title="了解 umi"
-              desc="umi 是一个可扩展的企业级前端应用框架,umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。"
+              href="/admin"
+              title="系统概览"
+              desc="进入仪表盘查看近期动态、数据概览与常用入口。"
             />
             <InfoCard
               index={2}
-              title="了解 Goal Admin"
-              href="https://ant.design"
-              desc="antd 是基于 Goal Admin 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。"
+              title="资源管理"
+              href="/admin/resources/users"
+              desc="通过资源列表管理用户、管理员等实体，并支持筛选与导出。"
             />
             <InfoCard
               index={3}
-              title="了解 Pro Components"
-              href="https://procomponents.ant.design"
-              desc="ProComponents 是一个基于 Goal Admin 做了更高抽象的模板组件，以 一个组件就是一个页面为开发理念，为中后台开发带来更好的体验。"
+              title="操作指南"
+              href="#"
+              desc="查看常用操作说明与审核流程，快速上手平台管理。"
             />
           </div>
         </div>

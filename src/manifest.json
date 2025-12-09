@@ -1,6 +1,6 @@
 {
-  "name": "Goal Admin",
-  "short_name": "Goal Admin",
+  "name": "Goal-Admin 后台管理系统",
+  "short_name": "数字藏品后台",
   "display": "standalone",
   "start_url": "./?utm_source=homescreen",
   "theme_color": "#002140",
